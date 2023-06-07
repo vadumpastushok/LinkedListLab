@@ -115,8 +115,17 @@ public class CircularLinkedList<T> {
         }
     }
 
-    public CircularLinkedList<T> clone() {
-        return this;
+    public CircularLinkedList<T> cloneList() {
+        CircularLinkedList<T> list = new CircularLinkedList<>();
+        if (head == null) {
+            return list;
+        }
+        Node<T> node = head;
+        do {
+            list.append(node.getData());
+            node = node.getNext();
+        } while (node != head);
+        return list;
     }
 
     public void reverse() {

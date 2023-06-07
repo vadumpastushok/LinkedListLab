@@ -64,6 +64,21 @@ class CircularLinkedListTest {
     }
 
     @Test
+    void cloneList() {
+        CircularLinkedList<String> list = new CircularLinkedList<>();
+        list.append("1");
+        list.append("2");
+        list.append("3");
+        list.append("4");
+
+        CircularLinkedList<String> newList = list.cloneList();
+
+        list.insert("3", 2);
+
+        assertEquals("3", newList.get(2));
+    }
+
+    @Test
     void reverse() {
         CircularLinkedList<String> list = new CircularLinkedList<>();
         list.append("1");
