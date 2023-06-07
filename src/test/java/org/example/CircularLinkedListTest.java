@@ -33,6 +33,27 @@ class CircularLinkedListTest {
     }
 
     @Test
+    void delete() {
+        CircularLinkedList<String> list = new CircularLinkedList<>();
+        list.append("1");
+        list.insert("2", 0);
+        list.append("3");
+        list.delete(1);
+        assertEquals("3", list.get(1));
+    }
+
+    @Test
+    void deleteAll() {
+        CircularLinkedList<Integer> list = new CircularLinkedList<>();
+        list.append(0);
+        list.append(1);
+        list.append(0);
+        list.append(2);
+        list.deleteAll(0);
+        assertEquals(2, list.length());
+    }
+
+    @Test
     void get() {
         CircularLinkedList<String> list = new CircularLinkedList<>();
         list.append("1");
@@ -42,6 +63,16 @@ class CircularLinkedListTest {
         assertEquals("4", list.get(3));
     }
 
+    @Test
+    void reverse() {
+        CircularLinkedList<String> list = new CircularLinkedList<>();
+        list.append("1");
+        list.append("2");
+        list.append("3");
+        list.append("4");
+        list.reverse();
+        assertEquals("4", list.get(0));
+    }
     @Test
     void clear() {
         CircularLinkedList<String> list = new CircularLinkedList<>();

@@ -61,11 +61,44 @@ public class CircularLinkedList<T> {
     }
 
     public void delete(Integer index) {
+        if (head == null) {
+            return;
+        }
+        int i = 0;
+        Node<T> node = head;
+        while (node != null && node.getNext() != head && i != index - 1) {
+            i++;
+            node = node.getNext();
+        }
 
+        if (i == index - 1 && node != null && node.getNext() != head) {
+            node.updateNext(node.getNext().getNext());
+        } else  if (index == 0 && head.getNext() == head) {
+            head = null;
+        } else if (index == 0 && node != null) {
+            node.updateNext(head.getNext());
+            head = head.getNext();
+        }
     }
 
     public void deleteAll(T element) {
-
+        if (head == null) {
+            return;
+        }
+        if (head == element && head.getNext() == head) {
+            head = null;
+            return;
+        }
+        Node<T> node = head;
+        do {
+            if (node.getNext().getData() == element) {
+                if (node.getNext() == head) {
+                    head = node.getNext().getNext();
+                }
+                node.updateNext(node.getNext().getNext());
+            }
+            node = node.getNext();
+        } while (node != head);
     }
 
     public T get(Integer index) {
@@ -87,7 +120,23 @@ public class CircularLinkedList<T> {
     }
 
     public void reverse() {
+        if (head == null || head.getNext() == head) {
+            return;
+        }
 
+        Node<T> tail = head;
+
+        Node<T> prevNode = head;
+        Node<T> node = head.getNext();
+        while (node.getNext() != head) {
+            Node<T> nextNode = node.getNext();
+            node.updateNext(prevNode);
+            prevNode = node;
+            node = nextNode;
+        }
+        node.updateNext(prevNode);
+        head = node;
+        tail.updateNext(head);
     }
 
     public Integer findFirst(T element) {
