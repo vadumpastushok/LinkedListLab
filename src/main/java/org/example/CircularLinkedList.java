@@ -140,11 +140,38 @@ public class CircularLinkedList<T> {
     }
 
     public Integer findFirst(T element) {
-        return 0;
+        if (head == null) {
+            return -1;
+        }
+        Node<T> node = head;
+        int result = -1;
+        int index = 0;
+        do {
+            if (node.getData().equals(element)) {
+                result = index;
+                break;
+            }
+            index++;
+            node = node.getNext();
+        } while (node != head);
+        return result;
     }
 
     public Integer findLast(T element) {
-        return 0;
+        if (head == null) {
+            return -1;
+        }
+        Node<T> node = head;
+        int result = -1;
+        int index = 0;
+        do {
+            if (node.getData().equals(element)) {
+                result = index;
+            }
+            index++;
+            node = node.getNext();
+        } while (node != head);
+        return result;
     }
 
     public void clear() {
@@ -152,7 +179,26 @@ public class CircularLinkedList<T> {
     }
 
     public void extend(CircularLinkedList<T> list) {
+        if (list.length() == 0) {
+            return;
+        }
+        Node<T> node = head;
+        while (node != null && node.getNext() != head) {
+            node = node.getNext();
+        }
 
+        if (node == null) {
+            node = new Node<>(list.get(0), null);
+            head = node;
+        } else {
+            node.updateNext(new Node<>(list.get(0),  null));
+            node = node.getNext();
+        }
+
+        for (int i = 1; i < list.length(); i++) {
+            node.updateNext(new Node<>(list.get(i), null));
+            node = node.getNext();
+        }
+        node.updateNext(head);
     }
-
 }
