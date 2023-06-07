@@ -112,9 +112,9 @@ class CircularLinkedListTest {
         list.append("4");
 
         CircularLinkedList<String> sublist = new CircularLinkedList<>();
-        list.append("a");
-        list.append("b");
-        list.append("c");
+        sublist.append("a");
+        sublist.append("b");
+        sublist.append("c");
 
         list.extend(sublist);
 
